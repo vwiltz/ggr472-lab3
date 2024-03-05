@@ -21,6 +21,25 @@ map.on('load', () => {
         data: 'https://raw.githubusercontent.com/vwiltz/ggr472-lab3/main/data/airpollution.geojson'
     });
 
+    map.addLayer({
+        'id': 'polygon-fill', //  unique layer ID
+        'type': 'fill',
+        'source': 'air-pollution',  // data source: 
+        'paint': {
+            'fill-color': '#ffffff',
+            'fill-opacity': 0.5
+        }
+    });
+
+    map.addLayer({
+        'id': 'polygon-borders', // unique layer ID
+        'type': 'line',
+        'source': 'air-pollution', // 
+        'paint': {
+            'line-color': 'black',
+            'line-width': 1
+        }
+    });
 
     map.addLayer({
         'id': 'brownfield-points', // unique layer ID

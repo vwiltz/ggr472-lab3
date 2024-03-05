@@ -3,4 +3,10 @@
     top: 0;
     bottom: 0;
     width: 100%;
-    }
+}
+
+/* navbar appears on top of map */
+.navbar {
+    position: relative;
+    z-index: 1000;
+}

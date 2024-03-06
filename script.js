@@ -26,8 +26,16 @@ map.on('load', () => {
         'type': 'fill',
         'source': 'air-pollution',  // data source: 
         'paint': {
-            'fill-color': '#ffffff',
-            'fill-opacity': 0.5
+            'fill-color': [
+                'step',
+                ['get', 'Average PM2.5 concentration'],
+                '#FEF0D9',
+                5.739241, '#FDCC8A',
+                6.038870, '#FC8D59',
+                6.238142, '#E34A33',
+                6.789689, '#B30000',
+                '#9C9C9C'
+            ]
         }
     });
 
@@ -41,13 +49,21 @@ map.on('load', () => {
         }
     });
 
-    map.addLayer({
-        'id': 'brownfield-points', // unique layer ID
-        'type': 'circle',
-        'source': 'brownfields', // data source: brownfields/contaminated sites
-        'paint': {
-            'circle-radius': 2,
-            'circle-color': '#362c22'
-        }
-    });
+    /*   map.addLayer({
+           'id': 'brownfield-points', // unique layer ID
+           'type': 'circle',
+           'source': 'brownfields', // data source: brownfields/contaminated sites
+           'paint': {
+               'circle-radius': 2,
+               'circle-color': '#362c22'
+           }
+       }); */
+
+    map.on('click', 'polygon-fill', (e) => {
+
+        console.log
+
+    })
+
+
 });

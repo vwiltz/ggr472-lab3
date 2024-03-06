@@ -27,14 +27,17 @@ map.on('load', () => {
         'source': 'air-pollution',  // data source: 
         'paint': {
             'fill-color': [
-                'step',
-                ['get', 'Average PM2.5 concentration'],
-                '#FEF0D9',
-                5.739241, '#FDCC8A',
-                6.038870, '#FC8D59',
-                6.238142, '#E34A33',
-                6.789689, '#B30000',
-                '#9C9C9C'
+                'case',
+                ['==', ['get', 'Average PM2.5 concentration'], null], "#9C9C9C",
+                ['step',
+                    ['get', 'Average PM2.5 concentration'],
+
+                    '#FEF0D9',
+                    5.739241, '#FDCC8A',
+                    6.038870, '#FC8D59',
+                    6.238142, '#E34A33',
+                    6.789689, '#B30000']
+
             ]
         }
     });

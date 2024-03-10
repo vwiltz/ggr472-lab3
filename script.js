@@ -13,7 +13,10 @@ map.on('load', () => {
     // add data sources containing GeoJSON data
     map.addSource('brownfields', {
         type: 'geojson',
-        data: 'https://raw.githubusercontent.com/vwiltz/ggr472-lab3/main/data/brownfields.geojson'
+        data: 'https://raw.githubusercontent.com/vwiltz/ggr472-lab3/main/data/brownfields.geojson',
+        cluster: true,
+        clusterMaxZoom: 14,
+        clusterRadius: 50
     });
 
     map.addSource('air-pollution', {
@@ -51,6 +54,59 @@ map.on('load', () => {
             'line-width': 1
         }
     });
+
+    map.addLayer({
+        'id': 'clusters',
+        'type': 'circle',
+        'source': 'brownfields',
+        'filter': ['has', 'point_count'],
+        'paint': {
+            'circle-color': [
+                'step',
+                ['get', 'point_count'],
+                '#51bbd6',
+                50,
+                '#f1f075',
+                100,
+                '#ff0000'
+            ],
+            'circle-radius': [
+                'step',
+                ['get', 'point_count'],
+                20,
+                50,
+                30,
+                100,
+                40
+            ]
+        }
+    });
+
+    map.addLayer({
+        'id': 'cluster-count',
+        'type': 'symbol',
+        'source': 'brownfields',
+        'filter': ['has', 'point_count'],
+        'layout': {
+            'text-field': ['get', 'point_count_abbreviated'],
+            'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+            'text-size': 12
+        }
+    });
+
+    map.addLayer({
+        'id': 'unclustered-point',
+        'type': 'circle',
+        'source': 'brownfields',
+        'filter': ['!', ['has', 'point_count']],
+        'paint': {
+            'circle-color': '#11b4da',
+            'circle-radius': 4,
+            'circle-stroke-width': 1,
+            'circle-stroke-color': '#fff'
+        }
+    });
+
 
     /*   map.addLayer({
            'id': 'brownfield-points', // unique layer ID

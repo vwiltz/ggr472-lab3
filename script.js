@@ -58,7 +58,7 @@ map.on('load', () => {
         'source': 'air-pollution', // 
         'paint': {
             'line-color': 'black',
-            'line-width': 1
+            'line-width': 0.7
         }
     });
 
